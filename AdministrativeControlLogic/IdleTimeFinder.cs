@@ -8,6 +8,13 @@ using static AdministrativeControlLogic.TimeController;
 
 namespace AdministrativeControlLogic
 {
+    internal struct LASTINPUTINFO
+    {
+        public uint cbSize;
+
+        public uint dwTime;
+    }
+
     /// <summary>
     /// Helps to find the idle time, (in milliseconds) spent since the last user input
     /// </summary>

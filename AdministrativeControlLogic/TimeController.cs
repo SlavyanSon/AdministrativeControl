@@ -1,18 +1,26 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-namespace AdministrativeControlLogic
+﻿namespace AdministrativeControlLogic
 {
-    public class TimeController
-    {
-        internal struct LASTINPUTINFO
-        {
-            public uint cbSize;
+	public class TimeController
+	{
+		private readonly int IdleTime = 1 * 1000;
 
-            public uint dwTime;
-        }
+		private int _UserActiveSeconds;
 
-        
+		/// <summary>
+		/// Возвращает признак неактивности пользователя.
+		/// </summary>
+		public bool IsUserIdle => IdleTimeFinder.GetIdleTime() > IdleTime;
 
-    }
+		public int UserActiveSeconds => _UserActiveSeconds;
+
+		public void Runner()
+		{
+			while (true)
+			{
+				Thread.Sleep(1000);
+				if (IsUserIdle == false)
+					_UserActiveSeconds++;
+			}
+		}
+	}
 }
